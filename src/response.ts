@@ -9,10 +9,10 @@ export type InferResult<T> = T extends ResponseSchema<infer TSchema, any, infer 
 
 export type InferMapperArg<T> = T extends ResponseSchema<any, infer TArg, any> ? TArg : never;
 export type InferMapper<T> =
-  T extends ResponseSchema<infer TSchema, infer TArg, infer TResult> ? (data: z.infer<TSchema>) => (arg: MapperCallbackArg<TArg>) => TResult : undefined;
+  T extends ResponseSchema<infer TSchema, infer TArg, infer TResult> ? (data: Readonly<z.infer<TSchema>>) => (arg: MapperCallbackArg<TArg>) => TResult : undefined;
 
 type MapperCallbackArg<T> = T extends Record<string, any> ? T : undefined;
-type MapperCallback<T extends z.ZodSchema, TArg, TResult> = (data: z.infer<T>) => (arg: MapperCallbackArg<TArg>) => TResult;
+type MapperCallback<T extends z.ZodSchema, TArg, TResult extends Readonly<z.infer<T>>> = (data: Readonly<z.infer<T>>) => (arg: MapperCallbackArg<TArg>) => TResult;
 
 export function create<T extends z.ZodSchema, TArg, TResult>(schema: T): ResponseSchema<T, undefined, undefined>;
 export function create<T extends z.ZodSchema, TArg, TResult>(schema: T, mapper: MapperCallback<T, {}, TResult>): ResponseSchema<T, undefined, TResult>;
