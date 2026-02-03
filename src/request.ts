@@ -82,9 +82,7 @@ export function create<TSchema extends Types.RequestSchema, TError = string>(
           await Promise.resolve(prefetchCallback({ url, method: schema.method, headers, body }));
         }
 
-        const recordHeaders = Utils.headersToRecord(headers);
-
-        const responseOrError = await Utils.executeRequest(url, schema, validatedParams, recordHeaders, language);
+        const responseOrError = await Utils.executeRequest(url, schema, validatedParams, defaultHeaders, language);
         if ("error" in responseOrError) {
           const nError = { ...responseOrError, endpoint: url, method: schema.method };
           dispatchPostFetchCallback(postfetchCallback, nError);
