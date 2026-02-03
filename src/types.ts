@@ -41,7 +41,13 @@ export type CallSignature<T extends RequestSchema> = InferURLParam<T> &
   };
 
 // Prefetch and postfetch callback types
-export type PrefetchCallback = (args: { url: string; method: HttpMethod; headers: Headers; body?: BodyInit | null }) => Promise<void> | void;
+export type PrefetchCallback = (args: {
+  url: string;
+  method: HttpMethod;
+  headers: Headers;
+  body?: BodyInit | null;
+  defaultHeaders: Record<string, string> | undefined;
+}) => Promise<void> | void;
 export type PostfetchCallback<TData = any, TError = any> = (response: ApiResponse<TData, TError>) => Promise<void> | void;
 
 // Core response types

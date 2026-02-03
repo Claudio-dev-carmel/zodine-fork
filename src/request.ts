@@ -79,7 +79,7 @@ export function create<TSchema extends Types.RequestSchema, TError = string>(
 
         // Call prefetchCallback if provided
         if (prefetchCallback) {
-          await Promise.resolve(prefetchCallback({ url, method: schema.method, headers, body }));
+          await Promise.resolve(prefetchCallback({ url, method: schema.method, headers, body, defaultHeaders }));
         }
 
         const responseOrError = await Utils.executeRequest(url, schema, validatedParams, defaultHeaders, language);
