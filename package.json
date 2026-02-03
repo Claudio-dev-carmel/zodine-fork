@@ -24,7 +24,8 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "check-format": "prettier --check \"src/**/*.ts\"",
     "verify": "node verify-build.js",
-    "pack-test": "npm pack --dry-run"
+    "pack-test": "npm pack --dry-run",
+    "prepare": "npm run build"
   },
   "keywords": [
     "typescript",

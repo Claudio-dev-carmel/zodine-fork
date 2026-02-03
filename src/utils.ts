@@ -90,3 +90,13 @@ export async function handleErrorResponse<TError = string>(
 
   return Errors.createCustomError(message, data, response.status);
 }
+
+export function headersToRecord(headers: Headers): Record<string, string> {
+  const record: Record<string, string> = {};
+
+  headers.forEach((value, key) => {
+    record[key] = value;
+  });
+
+  return record;
+}
